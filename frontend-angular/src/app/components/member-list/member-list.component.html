@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  <h1 class="text-center mb-4">Émargement des Membres</h1>
+  
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Date de naissance</th>
+          <th>Statut</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let member of members$ | async">
+          <td>{{ member.lastName }}</td>
+          <td>{{ member.firstName }}</td>
+          <td>{{ member.birthDate | date:'dd/MM/yyyy' }}</td>
+          <td>
+            <span [ngClass]="{ 'text-success': member.hasVoted, 'text-danger': !member.hasVoted }">
+              {{ member.hasVoted ? 'A voté' : 'Non voté' }}
+            </span>
+          </td>
+          <td>
+            <button *ngIf="!member.hasVoted" 
+                    class="btn btn-primary" 
+                    (click)="onVote(member.id)">
+              Voter
+            </button>
+            <span *ngIf="member.hasVoted" class="text-muted">
+              Déjà voté
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
