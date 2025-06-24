@@ -1,0 +1,55 @@
+<div class="voters-container">
+  <div class="voters-header">
+    <h2>Election Voting System</h2>
+    <div class="voters-stats">
+      <div class="stat-item">
+        <span class="stat-label">Total Voters:</span>
+        <span class="stat-value">{{ totalVoters }}</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Voted:</span>
+        <span class="stat-value voted">{{ votedCount }}</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Remaining:</span>
+        <span class="stat-value remaining">{{ remainingCount }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="voters-search">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Search voters..." class="search-input">
+  </div>
+
+  <div class="voters-table-container">
+    <table class="voters-table">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Date of Birth</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let voter of filteredVoters">
+          <td>{{ voter.firstName }}</td>
+          <td>{{ voter.lastName }}</td>
+          <td>{{ voter.dateOfBirth | date:'dd/MM/yyyy' }}</td>
+          <td>
+            <button *ngIf="!voter.hasVoted" 
+                    (click)="vote(voter.id)"
+                    class="vote-btn"
+                    [disabled]="isVoting">
+              Vote
+            </button>
+            <span *ngIf="voter.hasVoted" class="voted">✓ Voted</span>
+          </td>
+        </tr>
+        <tr *ngIf="filteredVoters.length === 0">
+          <td colspan="4" class="no-results">No voters found</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

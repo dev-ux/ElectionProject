@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { VoterListComponent } from './components/voter-list/voter-list.component';
+import { VotersComponent } from './voters/voters.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    VoterListComponent
+    VotersComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
