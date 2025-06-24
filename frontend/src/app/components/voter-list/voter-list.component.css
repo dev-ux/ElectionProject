@@ -1,0 +1,9 @@
+.table-responsive {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.badge {
+  padding: 0.5em;
+  font-size: 0.9em;
+}

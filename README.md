@@ -1,129 +1,60 @@
-# Application de Vote - Gestion des Élections de l'Association
+# Voting Management System
 
-## Présentation
-Cette application gère le processus de vote pour l'élection du conseil d'administration de l'association. Elle fournit une interface simple pour l'émargement des membres et le suivi des votes.
+A web application for managing voting processes in an association.
 
-## Architecture
+## Project Overview
 
-### Frontend
-- **Framework**: Angular
-- **Fonctionnalités**:
-  - Liste des membres de l'association
-  - Interface de vote simple
-  - Mise à jour en temps réel du statut de vote
+This application is designed to manage the voting process for association elections. It provides a simple interface for managing voter registration and tracking who has voted.
 
-### Backend
-- **Framework**: Spring Boot (Java)
-- **Fonctionnalités**:
-  - API REST
-  - Gestion des membres
-  - Suivi des votes
+## Technical Stack
 
-### Base de données
-- **Système**: MySQL
-- **Entités principales**:
-  - Membres (nom, prénom, date de naissance)
-  - Historique des votes
+- Frontend: Angular
+- Backend: Spring Boot
+- Database: MySQL
+- Containerization: Docker
+- CI/CD: GitLab CI
 
-## Stack Technique
+## Project Structure
 
-### Frontend
-- Angular
-- Bootstrap pour le design
-- HttpClient pour les appels API
+```
+├── frontend/           # Angular application
+├── backend/           # Spring Boot application
+├── docker/            # Docker configuration files
+└── docs/             # Documentation
+```
 
-### Backend
-- Spring Boot
-- Spring Web
-- Spring Data JPA
-- Spring Security (pour futures versions)
+## Setup Instructions
 
-### Base de données
-- MySQL
-- Hibernate/JPA pour l'ORM
+1. Prerequisites:
+   - Docker and Docker Compose
+   - Node.js (for frontend development)
+   - Java JDK (for backend development)
 
-### Conteneurisation
-- Docker
-- Docker Compose
-
-### Tests
-- JUnit pour le backend
-- Jasmine/Karma pour le frontend
-
-## API REST (Version 1)
-
-### Points d'entrée
-
-#### GET /api/membres
-- Liste tous les membres de l'association
-- Retourne un tableau de membres avec leur statut de vote
-
-#### POST /api/membres/{id}/vote
-- Marque un membre comme ayant voté
-- Action irréversible
-- Validation du statut de membre
-
-## Projections pour les futures versions
-
-### Gestion des scrutins multiples
-- Ajout d'une entité Scrutin
-- Association membre-scrutin
-- Historique des votes par scrutin
-
-### Anonymisation des votes
-- Génération d'identifiants uniques anonymes
-- Séparation des données personnelles et des votes
-- Statistiques anonymes
-
-### Sécurité
-- Authentification des membres
-- Autorisations basées sur les rôles
-- Journalisation sécurisée
-
-## Configuration requise
-- Java 17+
-- Node.js 18+
-- Docker et Docker Compose
-- MySQL 8+
-
-## Installation
-
-1. Cloner le repository
-2. Configurer les variables d'environnement
-3. Lancer les conteneurs avec Docker Compose
-4. Accéder à l'application via le navigateur
-
-## Tests
-
-### Backend
+2. Build and Run:
 ```bash
-docker-compose exec backend mvn test
+# Build and run with Docker
+docker-compose up --build
+
+# Access the application
+http://localhost:4200
 ```
 
-### Frontend
-```bash
-docker-compose exec frontend ng test
-```
+## Features (V1)
 
-## CI/CD
-Utilisation de GitLab CI pour:
-- Tests automatisés
-- Build Docker
-- Déploiement automatique
+- List all association members
+- Track voting status
+- Simple and intuitive UI
+- Dockerized deployment
+- Basic testing
 
-## Documentation API
-Disponible via Swagger UI:
-```
-http://localhost:8080/swagger-ui.html
-```
+## Future Enhancements (Planned)
 
-## Contributing
-Pour contribuer au projet, veuillez suivre ces étapes:
-1. Fork le repository
-2. Créer une branche pour votre fonctionnalité
-3. Commit vos changements
-4. Push vers votre branche
-5. Créer une Pull Request
+- Multiple election management
+- Anonymous vote recording
+- User authentication
+- Advanced reporting
+- Mobile responsiveness
 
-## Licence
-Ce projet est sous licence MIT - voir le fichier LICENSE pour plus de détails.
+## License
+
+MIT License

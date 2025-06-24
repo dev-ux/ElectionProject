@@ -1,46 +1,30 @@
-image: maven:3.8.6-openjdk-17
-
 stages:
   - build
   - test
   - deploy
 
 variables:
-  MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
-  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
-
-before_script:
-  - apt-get update -qq && apt-get install -y -qq git
-
-cache:
-  paths:
-    - .m2/repository
+  DOCKER_DRIVER: overlay2
 
 build:
   stage: build
   script:
-    - mvn $MAVEN_CLI_OPTS clean package
+    - ./build.sh
   artifacts:
     paths:
-      - backend-spring-boot/target/*.jar
-      - frontend-angular/dist/
+      - docker/
 
 test:
   stage: test
   script:
-    - mvn $MAVEN_CLI_OPTS test
-    - cd frontend-angular
-    - npm install
-    - npm test -- --watch=false
+    - docker-compose up -d
+    - sleep 10
+    - curl http://localhost:80/api/voters
+    - docker-compose down
 
 deploy:
   stage: deploy
-  script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker-compose build
-    - docker-compose push
   only:
-    - master
-
-after_script:
-  - echo "Build finished"
+    - main
+  script:
+    - docker-compose up -d --force-recreate
